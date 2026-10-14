@@ -1,7 +1,7 @@
 # Radio Ghost Writer
 
 リファレンス記事（ラジオ原稿など）のスタイルを分析し、同じトーンで新しい記事を生成する執筆支援ツール。
-AIには Claude (Anthropic) および GPT-4o-mini (OpenAI) を使用します。
+AIには Claude (Anthropic) および GPT-6 Luna (OpenAI) を使用します。
 
 ## 主な機能
 

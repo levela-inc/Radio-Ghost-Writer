@@ -4787,7 +4787,7 @@ async function submitEditSelection(mode) {
         selected_text: editSelectedText,
         instruction: instruction,
         style_guide: sg,
-        model: state.selectedModel,
+        model: getSelectedModel(),
       }),
     });
     const data = await res.json();
@@ -4833,7 +4833,7 @@ async function submitEditFull(mode) {
         full_html: currentMarkdown || outputEl.innerText,
         instruction: instruction,
         style_guide: sg,
-        model: state.selectedModel,
+        model: getSelectedModel(),
       }),
     });
     const data = await res.json();

@@ -36,7 +36,8 @@ CORS(app)
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 openai_client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-DEFAULT_MODEL = "claude-opus-4-6"
+DEFAULT_MODEL = "claude-opus-5-5"
+SCORING_MODEL = "gpt-6-luna"
 
 # Google GCP 設定
 GCP_SCOPES = [
@@ -137,10 +138,10 @@ def get_drive_service():
     return _drive_service
 
 AVAILABLE_MODELS = [
-    {"id": "claude-opus-4-6", "name": "Claude Opus 4.6", "desc": "最高性能 / 長文・高品質向け"},
-    {"id": "claude-sonnet-4-20250514", "name": "Claude Sonnet 4", "desc": "高速・バランス型"},
-    {"id": "claude-haiku-4-20250514", "name": "Claude Haiku 4", "desc": "最速・低コスト"},
+    {"id": "claude-opus-5-5", "name": "Claude Opus 5.5", "desc": "最高性能 / 長文・高品質向け"},
+    {"id": "claude-sonnet-5", "name": "Claude Sonnet 5", "desc": "高速・低コスト"},
 ]
+AVAILABLE_MODEL_IDS = {m["id"] for m in AVAILABLE_MODELS}
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
@@ -185,15 +186,21 @@ def require_auth(f):
 def call_claude(system_prompt, user_prompt, *, json_mode=False, model=None):
     messages = [{"role": "user", "content": user_prompt}]
 
+    # 一覧にないモデル（旧モデルIDなど）が送られてきた場合は既定値に寄せる
+    if model not in AVAILABLE_MODEL_IDS:
+        model = DEFAULT_MODEL
+
     kwargs = {
-        "model": model or DEFAULT_MODEL,
-        "max_tokens": 8192,
+        "model": model,
+        # Claude 5系は思考（thinking）が常に有効で、その分もmax_tokensを消費する
+        "max_tokens": 16000,
         "system": system_prompt,
         "messages": messages,
     }
 
     response = client.messages.create(**kwargs)
-    text = response.content[0].text
+    # 先頭にthinkingブロックが来るため、textブロックだけを連結する
+    text = "".join(b.text for b in response.content if b.type == "text")
 
     if json_mode:
         text = text.strip()
@@ -1205,7 +1212,7 @@ def get_questions():
 @app.route("/api/questions/score", methods=["POST"])
 @require_auth
 def score_questions():
-    """o3-miniで質問を一括採点する"""
+    """OpenAI（SCORING_MODEL）で質問を一括採点する"""
     data = request.json
     questions = data.get("questions", [])
     
@@ -1224,7 +1231,7 @@ def score_questions():
     
     try:
         response = openai_client.chat.completions.create(
-            model="o3-mini",
+            model=SCORING_MODEL,
             messages=[
                 {"role": "developer", "content": system_prompt},
                 {"role": "user", "content": user_prompt}

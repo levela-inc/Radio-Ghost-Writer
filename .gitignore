@@ -9,3 +9,5 @@ static/thumbnails/
 .DS_Store
 .vercel/
 glm/
+.vercel
+.env*
