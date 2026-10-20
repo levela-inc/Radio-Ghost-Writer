@@ -11,3 +11,4 @@ static/thumbnails/
 glm/
 .vercel
 .env*
+/docs/goal/.progress.json.lock
