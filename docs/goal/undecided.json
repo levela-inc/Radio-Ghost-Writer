@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "id": "u1",
+      "target": "goal.purpose",
+      "question": "なぜ作るか・解決する課題は何ですか？",
+      "note": "今回はREADME記載の機能概要のみで登録。目的・課題は未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u2",
+      "target": "goal.users",
+      "question": "利用者と利用場面は？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u3",
+      "target": "goal.scopeOut",
+      "question": "やらないことは？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u4",
+      "target": "goal.constraints",
+      "question": "期限・技術・予算・連携先などの制約は？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u5",
+      "target": "goal.criteria",
+      "question": "完了条件は？（5個以上必要）",
+      "note": "未確認。ゴールの確定は別途行う",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u6",
+      "target": "goal.deadline",
+      "question": "納期はいつですか？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u7",
+      "target": "goal.owners",
+      "question": "担当者（GitHubアカウント名）は？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u8",
+      "target": "goal.milestones",
+      "question": "中間目標は？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u9",
+      "target": "metrics",
+      "question": "追う数値はありますか？（追うかどうかも含めて）",
+      "note": "未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u10",
+      "target": "requirements.認証・権限",
+      "question": "ログイン方式・権限の区分は？",
+      "note": "Supabaseにuser_idがあるが認証方式の詳細は未確認",
+      "since": "2026-10-20"
+    },
+    {
+      "id": "u11",
+      "target": "requirements.非機能要件",
+      "question": "想定利用者数・可用性・パフォーマンス要件は？",
+      "note": "未確認",
+      "since": "2026-10-20"
+    }
+  ]
+}

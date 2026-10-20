@@ -1,0 +1,12 @@
+{
+  "schema": "levela-goal/v1",
+  "name": "radio-ghost-writer",
+  "title": "Radio Ghost Writer",
+  "version": 1,
+  "updatedAt": "2026-10-20",
+  "updatedBy": "ysaito-lev",
+  "reason": "初版",
+  "status": "draft",
+  "kind": "initial",
+  "goalChanges": 0
+}
